@@ -1,7 +1,9 @@
 package SpaceInvaders;
 
 import SpaceInvaders.Grafics.Panes.GamePane;
+import SpaceInvaders.Grafics.Panes.MainMenuPane;
 import SpaceInvaders.Grafics.Panes.ScorePane;
+import SpaceInvaders.Grafics.Panes.StatPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -15,7 +17,7 @@ public class Main extends Application {
     public final static int TILES_Y = 15;
     public final static int TILE_SIZE = 10*SCALE;
 
-    private BorderPane root;
+    private static BorderPane root;
 
         @Override
         public void start(Stage stage) {
@@ -23,8 +25,9 @@ public class Main extends Application {
             root = new BorderPane();
             Scene scene = new Scene(root);
 
-            GamePane gamePane = new GamePane(false, scene);
-            root.setTop(new ScorePane());
+            StatPane statPane = new StatPane();
+            GamePane gamePane = new GamePane(false, statPane, root);
+            root.setTop(statPane);
             root.setCenter(gamePane);
 
             stage.setTitle("Space Invaders");
@@ -35,4 +38,13 @@ public class Main extends Application {
         public static void main(String[] args) {
             launch();
         }
+
+        public static void newGame(int width, int height){
+            root.setCenter(new MainMenuPane(width, height));
+        }
+    public static void startGame(boolean isSinglePlayer){
+        StatPane statPane = new StatPane();
+        root.setTop(statPane);
+        root.setCenter(new GamePane(isSinglePlayer,statPane, root));
+    }
 }

@@ -28,19 +28,13 @@ public abstract class MovableNonPlayer extends ImageView {
     }
 
 
-    //Aner ikke hvorfor det trengs 11 og ikke 13 her..
     public boolean intersects(PlayerShip player){
         if(getGridPosY() > 11) {
-            if (getTranslateX() >= player.getTranslateX() &&
-                getTranslateX() <= player.getTranslateX()+player.getFitWidth() &&
-                getTranslateY() >= player.getTranslateY() &&
-                getTranslateY() <= player.getTranslateY() + player.getFitHeight()) {
-                interact(player);
-                return true;
-            }
+            return getTranslateX() >= player.getTranslateX() &&
+                    getTranslateX() <= player.getTranslateX() + player.getFitWidth() &&
+                    getTranslateY() >= player.getTranslateY() &&
+                    getTranslateY() <= player.getTranslateY() + player.getFitHeight();
         }
         return false;
     }
-
-    public abstract void interact(PlayerShip player);
 }

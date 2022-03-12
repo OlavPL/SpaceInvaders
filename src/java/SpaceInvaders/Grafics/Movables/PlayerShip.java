@@ -1,6 +1,7 @@
 package SpaceInvaders.Grafics.Movables;
 
 import SpaceInvaders.Grafics.Panes.GamePane;
+import SpaceInvaders.Grafics.Panes.StatPane;
 import SpaceInvaders.Main;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,10 +17,10 @@ public class PlayerShip extends PlayerComponent {
     private GamePane gamePane;
     private boolean playerOne;
     private boolean shootOnCoolDown = false;
-    private long shootCoolDownInMillis = 500;
+    private long shootCoolDownInMillis = 300;
     private Timeline shootCoolDown;
-    private int movementSpeed = 3;
-    private boolean alive = true;
+    private double movementSpeed = 1.25 * Main.SCALE;
+    private int lives = 3;
 
     public PlayerShip(GamePane gamePane, boolean playerOne, int width, int height) {
         super(playerOne ? "Sprites/Blue_Spaceship.png" : "Sprites/Red_Spaceship.png");
@@ -32,24 +33,27 @@ public class PlayerShip extends PlayerComponent {
         setFitHeight(getImage().getHeight()/3 * Main.SCALE);
         setLayoutX(-getFitWidth()/2);
         setLayoutY(-getFitHeight()/2);
+        updateGridPosX();
+        updateGridPosY();
+
     }
 
     public void moveLeft(){
         if(getTranslateX() > 0 + getFitWidth() / 2){
             setTranslateX(getTranslateX() - movementSpeed);
+            updateGridPosX();
         }
     }
 
     public void moveRight(){
         if(getTranslateX() < gamePane.WIDTH - getFitWidth()/2){
             setTranslateX(getTranslateX() + movementSpeed);
+            updateGridPosX();
         }
     }
 
-    public void die(){
-        gamePane.getChildren().remove(this);
-        setAlive(false);
-
+    public int die(){
+        return --lives;
     }
     public void shoot(ArrayList<Bullet> playerBullet){
         Bullet bullet = new Bullet(playerOne, getTranslateX(), getTranslateY());

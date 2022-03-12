@@ -1,9 +1,7 @@
-package SpaceInvaders.Grafics.Panes;
+package SpaceInvaders.Panes;
 
-import SpaceInvaders.GameUpdate;
 import SpaceInvaders.Main;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;

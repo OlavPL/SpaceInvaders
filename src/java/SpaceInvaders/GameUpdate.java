@@ -1,20 +1,17 @@
 package SpaceInvaders;
 
-import SpaceInvaders.Grafics.Movables.*;
-import SpaceInvaders.Grafics.Panes.EndScreenPane;
-import SpaceInvaders.Grafics.Panes.GamePane;
-import SpaceInvaders.Grafics.Panes.ScorePane;
-import SpaceInvaders.Grafics.Panes.StatPane;
+import SpaceInvaders.Movable.*;
+import SpaceInvaders.Panes.EndScreenPane;
+import SpaceInvaders.Panes.GamePane;
+import SpaceInvaders.Panes.ScorePane;
 import javafx.animation.*;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
+import java.io.*;
+import java.util.*;
 
 @Getter
 
@@ -32,6 +29,7 @@ public class GameUpdate{
     Timeline bulletTimer;
     Timeline enemyTimer;
 
+
     public GameUpdate(GamePane gamePane, PlayerShip playerOne, Scene scene){
         super();
         this.gamePane = gamePane;
@@ -41,6 +39,8 @@ public class GameUpdate{
         setListenerOnScene(scene);
         setUpdateOneTimer();
         setBulletTimer();
+
+
 
     }
     public GameUpdate(GamePane gamePane, PlayerShip playerOne, PlayerShip playerTwo, Scene scene){
@@ -200,6 +200,7 @@ public class GameUpdate{
                 gamePane.getStatPane().updateLabelLives(player.equals(playerOne), player.die());
                 if(player.getLives()==0) {
                     stopAllTimers();
+                    Main.serializeHighScore(Math.max(ScorePane.getPlayerOneScore(), ScorePane.getPlayerTwoScore()));
                     gameOver();
                 }
                 endOfRound(isPlayerOne);
@@ -288,5 +289,7 @@ public class GameUpdate{
             playerTwoTimer.stop();
         bulletTimer.stop();
     }
+
+
 
 }

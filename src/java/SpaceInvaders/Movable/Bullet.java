@@ -1,17 +1,12 @@
-package SpaceInvaders.Grafics.Movables;
+package SpaceInvaders.Movable;
 
-import SpaceInvaders.Grafics.Panes.GamePane;
-import SpaceInvaders.Grafics.Panes.ScorePane;
 import SpaceInvaders.Main;
-import javafx.geometry.Point2D;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashMap;
-
 @Setter
 @Getter
-public class Bullet extends PlayerComponent{
+public class Bullet extends PlayerComponent {
      private double bulletSpeed = 1.25 * Main.SCALE;
      private boolean playerOne;
 

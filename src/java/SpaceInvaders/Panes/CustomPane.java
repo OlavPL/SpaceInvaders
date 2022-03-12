@@ -1,4 +1,4 @@
-package SpaceInvaders.Grafics.Panes;
+package SpaceInvaders.Panes;
 
 import SpaceInvaders.Main;
 import javafx.scene.control.Label;

@@ -1,6 +1,6 @@
-package SpaceInvaders.Grafics.Movables;
+package SpaceInvaders.Movable;
 
-import SpaceInvaders.Grafics.Panes.GamePane;
+import SpaceInvaders.Panes.GamePane;
 
 public class EnemyPeon extends Enemy{
 

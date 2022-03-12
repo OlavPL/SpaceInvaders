@@ -1,8 +1,8 @@
-package SpaceInvaders.Grafics.Panes;
+package SpaceInvaders.Panes;
 
 import SpaceInvaders.GameUpdate;
-import SpaceInvaders.Grafics.Movables.PlayerShip;
 import SpaceInvaders.Main;
+import SpaceInvaders.Movable.PlayerShip;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

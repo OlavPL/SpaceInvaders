@@ -1,8 +1,7 @@
-package SpaceInvaders.Grafics.Movables;
-
-import SpaceInvaders.Grafics.Panes.GamePane;
+package SpaceInvaders.Movable;
 
 
+import SpaceInvaders.Panes.GamePane;
 import lombok.Getter;
 import lombok.Setter;
 

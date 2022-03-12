@@ -1,4 +1,4 @@
-package SpaceInvaders.Grafics.Movables;
+package SpaceInvaders.Movable;
 
 import SpaceInvaders.Main;
 import javafx.scene.image.ImageView;

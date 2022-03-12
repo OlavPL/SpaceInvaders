@@ -12,8 +12,7 @@ import java.util.HashMap;
 @Setter
 @Getter
 public class Bullet extends PlayerComponent{
-     private int bulletSpeed = 1 * Main.SCALE;
-     private int gridPosX, gridPosY;
+     private double bulletSpeed = 1.25 * Main.SCALE;
      private boolean playerOne;
 
 
@@ -28,29 +27,8 @@ public class Bullet extends PlayerComponent{
         updateGridPosY();
     }
 
-
-    public void updateGridPosX(){
-        checkX(Main.TILE_SIZE * Main.TILES_X, Main.TILES_X);
-    }
-
-    public void updateGridPosY(){
-        checkY(Main.TILE_SIZE * Main.TILES_Y, Main.TILES_Y);
-    }
-
-    public void checkX(double gridBreakpoint, int n){
-        if(getTranslateX() > gridBreakpoint) {
-            gridPosX = n;
-            return;
-        }
-        checkX(gridBreakpoint - Main.TILE_SIZE, n-1);
-    }
-
-    public void checkY(double gridBreakpoint, int n){
-        if(getTranslateY() > gridBreakpoint) {
-            gridPosY = n;
-            return;
-        }
-        checkY(gridBreakpoint - Main.TILE_SIZE, n-1);
+    public boolean reachedTop(){
+        return getGridPosY() == 0;
     }
     public void moveUp(){
         setTranslateY(getTranslateY()- bulletSpeed);

@@ -1,11 +1,14 @@
 package SpaceInvaders.Movable;
 
 import SpaceInvaders.Main;
+import SpaceInvaders.Panes.GamePane;
+import SpaceInvaders.Panes.ScorePane;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
+
 public class Bullet extends PlayerComponent {
      private double bulletSpeed = 1.25 * Main.SCALE;
      private boolean playerOne;
@@ -28,5 +31,18 @@ public class Bullet extends PlayerComponent {
     public void moveUp(){
         setTranslateY(getTranslateY()- bulletSpeed);
         updateGridPosY();
+    }
+
+    public boolean bulletkillCheck(Enemy[][] enemyGrid, GamePane gamePane){
+        Enemy enemy;
+        if( (enemy = enemyGrid[getGridPosX()][getGridPosY()]) != null) {
+            if(enemy.isHit()) {
+                ScorePane.updateScores(isPlayerOne(), enemy.getPointValue());
+                gamePane.getChildren().remove(enemy);
+                enemyGrid[enemy.getGridPosX()][enemy.getGridPosY()] = null;
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -3,6 +3,7 @@ package SpaceInvaders;
 import SpaceInvaders.Movable.*;
 import SpaceInvaders.Panes.EndScreenPane;
 import SpaceInvaders.Panes.GamePane;
+import SpaceInvaders.Panes.HighScore;
 import SpaceInvaders.Panes.ScorePane;
 import javafx.animation.*;
 import javafx.scene.Scene;
@@ -147,8 +148,9 @@ public class GameUpdate{
                 continue;
             }
             bullet.moveUp();
-            if(bulletkillCheck(bullet))
+            if(bullet.bulletkillCheck(enemyGrid, gamePane)) {
                 removedBulletsOne.add(bullet);
+            }
         }
         if(!onePlayer){
         for (Bullet bullet: playerTwoBullets) {
@@ -157,7 +159,7 @@ public class GameUpdate{
                 continue;
             }
             bullet.moveUp();
-            if (bulletkillCheck(bullet))
+            if (bullet.bulletkillCheck(enemyGrid, gamePane))
                 removedBulletsTwo.add(bullet);
         }
         }
@@ -167,19 +169,6 @@ public class GameUpdate{
             gamePane.getChildren().removeAll(removedBulletsTwo);
             playerTwoBullets.removeAll(removedBulletsTwo);
         }
-    }
-
-    private boolean bulletkillCheck(Bullet bullet){
-        Enemy enemy;
-        if( (enemy = enemyGrid[bullet.getGridPosX()][bullet.getGridPosY()]) != null) {
-            if(enemy.getClass() != TankBoi.class) {
-                ScorePane.updateScores(bullet.isPlayerOne(), enemy.getPointValue());
-                gamePane.getChildren().remove(enemy);
-                enemyGrid[enemy.getGridPosX()][enemy.getGridPosY()] = null;
-                return true;
-            }
-        }
-        return false;
     }
 
     private void progressWave(){
@@ -200,7 +189,7 @@ public class GameUpdate{
                 gamePane.getStatPane().updateLabelLives(player.equals(playerOne), player.die());
                 if(player.getLives()==0) {
                     stopAllTimers();
-                    Main.serializeHighScore(Math.max(ScorePane.getPlayerOneScore(), ScorePane.getPlayerTwoScore()));
+                    ScorePane.getHighScoreList().addScore(Math.max(ScorePane.getPlayerOneScore(), ScorePane.getPlayerTwoScore()));
                     gameOver();
                 }
                 endOfRound(isPlayerOne);
@@ -247,14 +236,6 @@ public class GameUpdate{
                 gamePane.getChildren().add(peon);
 
             }
-//            switch (random.nextInt(20)) {
-//
-//                case 0, 1, 2 -> {
-//                }
-//
-//                case 3 -> {
-//                }
-//            }
         }
     }
 
@@ -289,7 +270,5 @@ public class GameUpdate{
             playerTwoTimer.stop();
         bulletTimer.stop();
     }
-
-
 
 }

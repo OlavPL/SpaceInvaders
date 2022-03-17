@@ -18,7 +18,7 @@ public class StatPane extends VBox implements CustomText {
     private Label playerTwoLabel;
     private ScorePane scorepane;
 
-    public StatPane(int topScore){
+    public StatPane(){
         setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
         playerOneLabel = newLabel("Player One Lives: " + playerOneLives);
         playerTwoLabel = newLabel("Player Two Lives: " + playerOneLives);
@@ -29,7 +29,7 @@ public class StatPane extends VBox implements CustomText {
         updateLabelLives(false);
         livesBox.getChildren().add(playerOneLabel);
         livesBox.getChildren().add(playerTwoLabel);
-        this.scorepane = new ScorePane(topScore);
+        this.scorepane = new ScorePane();
         getChildren().addAll(scorepane, livesBox);
     }
 

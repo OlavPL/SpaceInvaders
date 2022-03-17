@@ -2,6 +2,7 @@ package SpaceInvaders.Movable;
 
 import SpaceInvaders.Panes.GamePane;
 import SpaceInvaders.Main;
+import SpaceInvaders.Panes.ScorePane;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +16,7 @@ public class Enemy extends MovableNonPlayer {
     }
 
     public void moveDown(Enemy[][] enemies){
-        if(getGridPosY() == Main.TILES_Y-1){
+        if(getGridPosY() >= Main.TILES_Y-2){
             parentPane.getChildren().remove(this);
             parentPane.getGameUpdate().getEnemyGrid()[gridPosX][gridPosY] = null;
             return;
@@ -23,5 +24,9 @@ public class Enemy extends MovableNonPlayer {
         setGridPosY(getGridPosY()+1);
         setTranslateY(getTranslateY() + Main.TILE_SIZE);
         enemies[gridPosX][gridPosY] = this;
+    }
+
+    public boolean isHit(){
+        return true;
     }
 }
